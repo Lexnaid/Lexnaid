@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1200px" height="800px" font-size="16px">
+<style>
+@font-face {
+src: local('Consolas'), local('Consolas Bold');
+font-family: 'ConsolasFallback';
+font-display: swap;
+-webkit-size-adjust: 109%;
+size-adjust: 109%;
+}
+.key {fill:rgb(125, 26, 205);}
+.value {fill:rgb(85, 143, 231);}
+.asciiColor {fill:rgb(181, 187, 194);}
+.cc {fill:rgb(91, 101, 112);}
+.github-stat {fill:rgb(170, 103, 232);}
+.stat-number {fill:rgba(195, 215, 243, 0.69);}
+text, tspan {white-space: pre;}
+
+text, tspan {white-space: pre;}
+</style>
+<rect width="1200px" height="1000px" fill="#161b22" rx="15"/>
+
+<text x="15" y="30" class="asciiColor">
+
+</text>
+
+<text x="500" y="30" fill="#c2cfde">
+<tspan x="500" y="30">daniel@cantu</tspan> ——————————————————————————————————————————————————————————
+<tspan x="500" y="50" class="cc">. </tspan><tspan class="key">OS</tspan><tspan>: </tspan><tspan x="650" y="50" class="value"> Arch Linux, Windows 11, MacOS</tspan>
+<tspan x="500" y="70" class="cc">. </tspan><tspan class="key">Arch.DE</tspan><tspan>: </tspan><tspan x="650" y="70" class="value"> KDE Plasma</tspan>
+<tspan x="500" y="90" class="cc">. </tspan><tspan class="key">Uptime</tspan><tspan>: </tspan><tspan x="650" y="90" class="value"> 24 years old</tspan>
+<tspan x="500" y="110" class="cc">. </tspan><tspan class="key">Host</tspan><tspan>: </tspan><tspan x="650" y="110" class="value"> UDEM</tspan>
+<tspan x="500" y="130" class="cc">. </tspan><tspan class="key">Kernel</tspan><tspan>: </tspan><tspan x="650" y="130" class="value"> Data Engineer</tspan>
+<tspan x="500" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan>: </tspan><tspan x="650" y="150" class="value"> VSCode, Visual Studio, Vim</tspan>
+<tspan x="500" y="170" class="cc">. </tspan>
+
+
+<tspan x="500" y="190">Languages</tspan> —————————————————————————————————————————————————————————————
+<tspan x="500" y="210" class="cc">. </tspan><tspan class="key">Programming</tspan><tspan>: </tspan><tspan x="650" y="210" class="value"> Go, Python, Java, C++, Apex, MATLAB</tspan>
+<tspan x="500" y="230" class="cc">. </tspan><tspan class="key">Web Frontend</tspan><tspan>: </tspan><tspan x="650" y="230" class="value"> HTML, CSS, JavaScript (React, React Native)</tspan>
+<tspan x="500" y="250" class="cc">. </tspan><tspan class="key">Backend/APIs</tspan><tspan>: </tspan><tspan x="650" y="250" class="value"> Node.js, Python (Flask)</tspan>
+<tspan x="500" y="270" class="cc">. </tspan><tspan class="key">Data Science</tspan><tspan>: </tspan><tspan x="650" y="270" class="value"> Pandas, Scikit-Learn, Seaborn, PyTorch, TensorFlow</tspan>
+<tspan x="500" y="290" class="cc">. </tspan><tspan class="key">Database</tspan><tspan>: </tspan><tspan x="650" y="290" class="value"> SQL (MSSQL, MySQL, Oracle)</tspan>
+<tspan x="500" y="310" class="cc">. </tspan><tspan class="key">CLI</tspan><tspan>: </tspan><tspan x="650" y="310" class="value"> Bash, Zsh, YAML</tspan>
+<tspan x="500" y="330" class="cc">. </tspan><tspan class="key">Data Engineer</tspan><tspan>: </tspan><tspan x="650" y="330" class="value"> Apache (Beam, Airflow, Kafka, Spark) </tspan>
+<tspan x="500" y="350" class="cc">. </tspan>
+
+<tspan x="500" y="350">Tools:</tspan> ————————————————————————————————————————————————————————————————
+<tspan x="500" y="370" class="cc">.  </tspan><tspan class="key">Cloud</tspan><tspan>: </tspan><tspan x="650" y="370" class="value"> AWS, Azure, Google Cloud (GCP)</tspan>
+<tspan x="500" y="390" class="cc">.  </tspan><tspan class="key">DevOps</tspan><tspan>: </tspan><tspan x="650" y="390" class="value"> Docker, Kubernetes, Git</tspan>
+<tspan x="500" y="410" class="cc">. </tspan>
+
+
+<tspan x="500" y="430">IRL:</tspan> ——————————————————————————————————————————————————————————————————
+
+<tspan x="500" y="450"  class="cc">. </tspan><tspan class="key">Languages.Real</tspan><tspan>: </tspan><tspan x="650" y="450" class="value">     Spanish, English</tspan>
+<tspan x="500" y="470" class="cc">. </tspan><tspan class="key">Hobbies.Software</tspan><tspan>: </tspan><tspan x="650" y="470" class="value">     LeetCode Challenges, Game Development</tspan>
+<tspan x="500" y="490" class="cc">. </tspan><tspan class="key">Hobbies.Hardware</tspan><tspan>: </tspan><tspan x="650" y="490" class="value">     Smart Home systems, 3D Printing</tspan>
+<tspan x="500" y="510" class="cc">. </tspan><tspan class="key">Hobbies.Normal</tspan><tspan>: </tspan><tspan x="650" y="510" class="value">     Guitar, Gym</tspan>
+
+<tspan x="500" y="530">Contact</tspan><tspan></tspan>————————————————————————————————————————————————————————————————
+<tspan x="500" y="550" class="cc">. </tspan><tspan class="key">Email</tspan><tspan>: </tspan><tspan x="650" y="550" class="value">danielcantu000@gmail.com</tspan>
+<tspan x="500" y="570" class="cc">. </tspan><tspan class="key">LinkedIn</tspan><tspan>: </tspan><tspan x="650" y="570" class="value">danielecm</tspan>
+<tspan x="500" y="590" class="cc">. </tspan><tspan class="key">Discord</tspan><tspan>: </tspan><tspan x="650" y="590" class="value">lexnaid</tspan>
+<tspan x="500" y="610" class="cc">. </tspan>
+
+<tspan x="500" y="630">GitHub Stats</tspan> ——————————————————————————————————————————————————————————————
+<tspan x="500" y="650" class="cc">. </tspan><tspan class="key">Repositories</tspan><tspan>: </tspan><tspan x="650" y="650" class="github-stat">🔒 </tspan><tspan class="stat-number">7</tspan><tspan class="github-stat"> public repos</tspan>
+<tspan x="500" y="670" class="cc">. </tspan><tspan class="key">Stars</tspan><tspan>: </tspan><tspan x="650" y="670" class="github-stat">⭐ </tspan><tspan class="stat-number">0</tspan><tspan class="github-stat"> stars received</tspan>
+<tspan x="500" y="690" class="cc">. </tspan><tspan class="key">Forks</tspan><tspan>: </tspan><tspan x="650" y="690" class="github-stat">🍴 </tspan><tspan class="stat-number">0</tspan><tspan class="github-stat"> forks total</tspan>
+<tspan x="500" y="710" class="cc">. </tspan><tspan class="key">Network</tspan><tspan>: </tspan><tspan x="650" y="710" class="github-stat">👥 </tspan><tspan class="stat-number">1</tspan><tspan class="github-stat"> followers • </tspan><tspan class="stat-number">1</tspan><tspan class="github-stat"> following</tspan>
+<tspan x="500" y="730" class="cc">. </tspan><tspan class="key">This Year</tspan><tspan>: </tspan><tspan x="650" y="730" class="github-stat">🆕 </tspan><tspan class="stat-number">6</tspan><tspan class="github-stat"> new repositories</tspan>
+<tspan x="500" y="750" class="cc">. </tspan><tspan class="key">Top Languages</tspan><tspan>: </tspan><tspan x="650" y="750" class="github-stat">💻 Python 53.5% • Apex 43.9% • HTML 2.2%</tspan>
+<tspan x="500" y="770" class="cc">. </tspan><tspan class="key">Last Update</tspan><tspan>: </tspan><tspan x="650" y="770" class="github-stat">🤖 04/07/2025 (automated)</tspan>
+</text>
+</svg>
