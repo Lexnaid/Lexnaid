@@ -1,0 +1,227 @@
+# .github/workflows/update-neofetch-stats.yml
+name: 🤖 Update Neofetch Stats
+
+on:
+  schedule:
+    # Ejecutar todos los días a las 6:00 AM UTC (12:00 AM CST México)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Permite ejecutar manualmente desde GitHub UI
+  push:
+    branches: [ main ]
+    paths: 
+      - '.github/workflows/update-neofetch-stats.yml'
+      - 'scripts/update-stats.js'
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    
+    # Permisos mínimos necesarios
+    permissions:
+      contents: write
+      pull-requests: write
+      
+    steps:
+      - name: 🔄 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Token automático de GitHub
+          
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: 📦 Install Dependencies
+        run: |
+          cat > package.json << 'EOF'
+          {
+            "name": "neofetch-updater",
+            "version": "1.0.0",
+            "dependencies": {
+              "axios": "^1.6.0"
+            }
+          }
+          EOF
+          npm install
+          
+      - name: 📊 Update GitHub Stats
+        env:
+          # Usar el token automático de GitHub (sin exponer tu token personal)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+        run: |
+          node << 'EOF'
+          const axios = require('axios');
+          const fs = require('fs');
+          
+          const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+          const USERNAME = process.env.USERNAME || 'Lexnaid';
+          
+          // Configurar headers con token
+          const headers = {
+            'Authorization': `Bearer ${GITHUB_TOKEN}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'neofetch-stats-updater'
+          };
+          
+          async function fetchGitHubStats() {
+            try {
+              console.log(`🔍 Fetching stats for ${USERNAME}...`);
+              
+              // Usar el endpoint público (no requiere autenticación especial)
+              const [userResponse, reposResponse] = await Promise.all([
+                axios.get(`https://api.github.com/users/${USERNAME}`, { headers }),
+                axios.get(`https://api.github.com/users/${USERNAME}/repos?per_page=100&type=public`, { headers })
+              ]);
+              
+              const user = userResponse.data;
+              const repos = reposResponse.data;
+              
+              // Calcular estadísticas
+              const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+              const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
+              const publicRepos = user.public_repos;
+              const followers = user.followers;
+              const following = user.following;
+              
+              // Analizar lenguajes con porcentajes (solo repos no-fork)
+              const ownRepos = repos.filter(repo => !repo.fork && repo.language);
+              const languages = {};
+              
+              // Obtener estadísticas detalladas de lenguajes para repos principales
+              const languagePromises = ownRepos.slice(0, 20).map(async (repo) => {
+                try {
+                  const langResponse = await axios.get(
+                    `https://api.github.com/repos/${USERNAME}/${repo.name}/languages`,
+                    { headers }
+                  );
+                  return langResponse.data;
+                } catch (error) {
+                  console.log(`⚠️  Could not fetch languages for ${repo.name}`);
+                  return {};
+                }
+              });
+              
+              const languageResults = await Promise.all(languagePromises);
+              
+              // Sumar bytes de código por lenguaje
+              const languageBytes = {};
+              languageResults.forEach(langData => {
+                Object.entries(langData).forEach(([lang, bytes]) => {
+                  languageBytes[lang] = (languageBytes[lang] || 0) + bytes;
+                });
+              });
+              
+              // Calcular porcentajes
+              const totalBytes = Object.values(languageBytes).reduce((sum, bytes) => sum + bytes, 0);
+              
+              const topLanguages = Object.entries(languageBytes)
+                .map(([lang, bytes]) => ({
+                  lang,
+                  percentage: ((bytes / totalBytes) * 100).toFixed(1)
+                }))
+                .sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage))
+                .slice(0, 3) // Solo top 3
+                .map(({ lang, percentage }) => `${lang} ${percentage}%`)
+                .join(' • ');
+              
+              // Calcular contribuciones este año
+              const currentYear = new Date().getFullYear();
+              const thisYearRepos = repos.filter(repo => 
+                new Date(repo.created_at).getFullYear() === currentYear
+              ).length;
+              
+              const stats = {
+                repos: publicRepos,
+                stars: totalStars,
+                forks: totalForks,
+                followers: followers,
+                following: following,
+                topLanguages: topLanguages || 'Go 45.2% • Python 32.1% • JavaScript 22.7%',
+                thisYearRepos: thisYearRepos,
+                lastUpdate: new Date().toLocaleDateString('es-MX', {
+                  timeZone: 'America/Monterrey',
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                })
+              };
+              
+              console.log('📈 Stats calculated:', stats);
+              return stats;
+              
+            } catch (error) {
+              console.error('❌ Error fetching GitHub stats:', error.message);
+              throw error;
+            }
+          }
+          
+          async function updateNeofetchSVG(stats) {
+            try {
+              // Leer el template
+              let svgContent = fs.readFileSync('neofetch-template.svg', 'utf8');
+              
+              // Reemplazar placeholders
+              svgContent = svgContent
+                .replace(/\{\{TOTAL_REPOS\}\}/g, stats.repos)
+                .replace(/\{\{TOTAL_STARS\}\}/g, stats.stars)
+                .replace(/\{\{TOTAL_FORKS\}\}/g, stats.forks)
+                .replace(/\{\{FOLLOWERS\}\}/g, stats.followers)
+                .replace(/\{\{FOLLOWING\}\}/g, stats.following)
+                .replace(/\{\{TOP_LANGUAGES\}\}/g, stats.topLanguages)
+                .replace(/\{\{THIS_YEAR_REPOS\}\}/g, stats.thisYearRepos)
+                .replace(/\{\{LAST_UPDATE\}\}/g, stats.lastUpdate);
+              
+              // Escribir archivo actualizado
+              fs.writeFileSync('README-neofetch.svg', svgContent);
+              
+              console.log('✅ SVG updated successfully!');
+              
+            } catch (error) {
+              console.error('❌ Error updating SVG:', error.message);
+              throw error;
+            }
+          }
+          
+          // Ejecutar actualización
+          async function main() {
+            try {
+              const stats = await fetchGitHubStats();
+              await updateNeofetchSVG(stats);
+              
+              console.log('🎉 Neofetch stats updated successfully!');
+              
+            } catch (error) {
+              console.error('💥 Failed to update stats:', error);
+              process.exit(1);
+            }
+          }
+          
+          main();
+          EOF
+          
+      - name: 📝 Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          
+          # Verificar si hay cambios
+          if ! git diff --quiet README-neofetch.svg; then
+            git add README-neofetch.svg
+            git commit -m "🤖 Auto-update GitHub stats - $(date +'%Y-%m-%d %H:%M')"
+            git push
+            echo "✅ Changes committed and pushed"
+          else
+            echo "ℹ️ No changes detected in stats"
+          fi
+          
+      - name: 📋 Summary
+        if: always()
+        run: |
+          echo "## 📊 Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Date**: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
