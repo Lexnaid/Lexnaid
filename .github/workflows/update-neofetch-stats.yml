@@ -31,20 +31,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
           
       - name: 📦 Install Dependencies
         run: |
-          cat > package.json << 'EOF'
-          {
+          # Crear package.json temporal
+          echo '{
             "name": "neofetch-updater",
             "version": "1.0.0",
             "dependencies": {
               "axios": "^1.6.0"
             }
-          }
-          EOF
-          npm install
+          }' > package.json
+          
+          # Instalar dependencias
+          npm install --no-package-lock
+
           
       - name: 📊 Update GitHub Stats
         env:
