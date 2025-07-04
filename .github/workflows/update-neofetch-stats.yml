@@ -230,14 +230,17 @@ jobs:
             exit 1
           fi
           
-          # Verificar si hay cambios
-          if ! git diff --quiet README-neofetch.svg 2>/dev/null || [ ! -f "README-neofetch.svg" ]; then
-            git add README-neofetch.svg
+          # Agregar el archivo al staging area
+          git add README-neofetch.svg
+          
+          # Verificar si hay cambios después de staging
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes detected in stats (file unchanged)"
+          else
+            echo "📊 Changes detected, committing..."
             git commit -m "🤖 Auto-update GitHub stats - $(date +'%Y-%m-%d %H:%M')"
             git push
-            echo "✅ Changes committed and pushed"
-          else
-            echo "ℹ️ No changes detected in stats"
+            echo "✅ Changes committed and pushed successfully"
           fi
           
       - name: 📋 Summary
