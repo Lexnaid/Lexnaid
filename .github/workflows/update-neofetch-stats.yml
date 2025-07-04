@@ -45,7 +45,6 @@ jobs:
           
           # Instalar dependencias
           npm install --no-package-lock
-
           
       - name: 📊 Update GitHub Stats
         env:
@@ -161,8 +160,17 @@ jobs:
           
           async function updateNeofetchSVG(stats) {
             try {
+              // Verificar que el template existe
+              if (!fs.existsSync('neofetch-template.svg')) {
+                throw new Error('❌ neofetch-template.svg not found! Please create this file first.');
+              }
+              
+              console.log('📁 Template file found, reading...');
+              
               // Leer el template
               let svgContent = fs.readFileSync('neofetch-template.svg', 'utf8');
+              
+              console.log('🔄 Replacing placeholders...');
               
               // Reemplazar placeholders
               svgContent = svgContent
@@ -179,6 +187,7 @@ jobs:
               fs.writeFileSync('README-neofetch.svg', svgContent);
               
               console.log('✅ SVG updated successfully!');
+              console.log('📊 Generated file: README-neofetch.svg');
               
             } catch (error) {
               console.error('❌ Error updating SVG:', error.message);
@@ -208,8 +217,21 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           
+          # Mostrar archivos en el directorio
+          echo "📁 Files in directory:"
+          ls -la
+          
+          # Verificar si el archivo fue creado
+          if [ -f "README-neofetch.svg" ]; then
+            echo "✅ README-neofetch.svg was created successfully"
+            echo "📏 File size: $(du -h README-neofetch.svg)"
+          else
+            echo "❌ README-neofetch.svg was NOT created"
+            exit 1
+          fi
+          
           # Verificar si hay cambios
-          if ! git diff --quiet README-neofetch.svg; then
+          if ! git diff --quiet README-neofetch.svg 2>/dev/null || [ ! -f "README-neofetch.svg" ]; then
             git add README-neofetch.svg
             git commit -m "🤖 Auto-update GitHub stats - $(date +'%Y-%m-%d %H:%M')"
             git push
