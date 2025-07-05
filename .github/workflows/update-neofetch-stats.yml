@@ -261,7 +261,7 @@ jobs:
                 .replace(/\{\{LAST_UPDATE\}\}/g, stats.lastUpdate);
               
               // Escribir archivo actualizado
-              fs.writeFileSync('README-neofetch.svg', svgContent);
+              fs.writeFileSync('README.svg', svgContent);
               
               console.log('✅ SVG updated successfully!');
               console.log('📊 Generated file: README-neofetch.svg');
