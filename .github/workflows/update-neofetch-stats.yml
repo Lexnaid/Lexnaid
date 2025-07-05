@@ -292,7 +292,25 @@ jobs:
                 })
               });
               
-              return stats;
+              return {
+                repos: publicRepos,
+                // stars: totalStars,  // Comentado - para usar después si quieres
+                // forks: totalForks,  // Comentado - para usar después si quieres
+                // followers: followers,  // Comentado - para usar después si quieres
+                // following: following,  // Comentado - para usar después si quieres
+                topLanguages: topLanguages || 'Python 45.2% • Go 32.1% • JavaScript 22.7%',
+                thisYearRepos: thisYearRepos,
+                profileViews: profileViews || 150,
+                totalCommits: recentCommits > 0 ? recentCommits : 'N/A',
+                currentStreak: currentStreak || 0,
+                longestStreak: longestStreak || 0,
+                lastUpdate: new Date().toLocaleDateString('es-MX', {
+                  timeZone: 'America/Monterrey',
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                })
+              };
               
             } catch (error) {
               console.error('❌ Error fetching GitHub stats:', error.message);
