@@ -323,15 +323,18 @@ jobs:
           # Agregar el archivo al staging area
           git add README-neofetch.svg
           
-          # Verificar si hay cambios después de staging
+          # Siempre hacer commit (útil para nuevas métricas)
           if git diff --staged --quiet; then
-            echo "ℹ️ No changes detected in stats (file unchanged)"
-          else
-            echo "📊 Changes detected, committing..."
-            git commit -m "🤖 Auto-update GitHub stats - $(date +'%Y-%m-%d %H:%M')"
-            git push
-            echo "✅ Changes committed and pushed successfully"
+            echo "ℹ️ No changes detected, but forcing update for new metrics..."
+            # Tocar el archivo para forzar cambio
+            echo "<!-- Force update: $(date) -->" >> README-neofetch.svg
+            git add README-neofetch.svg
           fi
+          
+          echo "📊 Committing updated stats..."
+          git commit -m "🤖 Auto-update GitHub stats - $(date +'%Y-%m-%d %H:%M')"
+          git push
+          echo "✅ Changes committed and pushed successfully"
           
       - name: 📋 Summary
         if: always()
