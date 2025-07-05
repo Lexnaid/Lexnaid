@@ -257,27 +257,72 @@ jobs:
               let svgContent = fs.readFileSync('neofetch-template.svg', 'utf8');
               
               console.log('🔄 Replacing placeholders...');
+              console.log('🔍 Before replacement, checking placeholders:');
               
-              // Reemplazar placeholders
-              svgContent = svgContent
-                .replace(/\{\{TOTAL_REPOS\}\}/g, stats.repos)
-                // .replace(/\{\{TOTAL_STARS\}\}/g, stats.stars)  // Comentado
-                // .replace(/\{\{TOTAL_FORKS\}\}/g, stats.forks)  // Comentado
-                // .replace(/\{\{FOLLOWERS\}\}/g, stats.followers)  // Comentado
-                // .replace(/\{\{FOLLOWING\}\}/g, stats.following)  // Comentado
-                .replace(/\{\{TOP_LANGUAGES\}\}/g, stats.topLanguages)
-                .replace(/\{\{THIS_YEAR_REPOS\}\}/g, stats.thisYearRepos)
-                .replace(/\{\{PROFILE_VIEWS\}\}/g, stats.profileViews)
-                .replace(/\{\{TOTAL_COMMITS\}\}/g, stats.totalCommits)
-                .replace(/\{\{CURRENT_STREAK\}\}/g, stats.currentStreak)
-                .replace(/\{\{LONGEST_STREAK\}\}/g, stats.longestStreak)
-                .replace(/\{\{LAST_UPDATE\}\}/g, stats.lastUpdate);
+              // Verificar que los placeholders existen en el template
+              const placeholders = [
+                'TOTAL_REPOS', 'TOP_LANGUAGES', 'THIS_YEAR_REPOS', 
+                'PROFILE_VIEWS', 'TOTAL_COMMITS', 'CURRENT_STREAK', 
+                'LONGEST_STREAK', 'LAST_UPDATE'
+              ];
+              
+              placeholders.forEach(placeholder => {
+                const found = svgContent.includes(`{{${placeholder}}}`);
+                console.log(`   {{${placeholder}}}: ${found ? '✅ Found' : '❌ Missing'}`);
+              });
+              
+              // Reemplazar placeholders con logging
+              console.log('🔄 Performing replacements:');
+              
+              const replacements = [
+                ['TOTAL_REPOS', stats.repos],
+                ['TOP_LANGUAGES', stats.topLanguages],
+                ['THIS_YEAR_REPOS', stats.thisYearRepos],
+                ['PROFILE_VIEWS', stats.profileViews],
+                ['TOTAL_COMMITS', stats.totalCommits],
+                ['CURRENT_STREAK', stats.currentStreak],
+                ['LONGEST_STREAK', stats.longestStreak],
+                ['LAST_UPDATE', stats.lastUpdate]
+              ];
+              
+              replacements.forEach(([key, value]) => {
+                const before = svgContent.includes(`{{${key}}}`);
+                svgContent = svgContent.replace(new RegExp(`\\{\\{${key}\\}\\}`, 'g'), value);
+                const after = svgContent.includes(`{{${key}}}`);
+                console.log(`   {{${key}}} -> "${value}" | Before: ${before}, After: ${after ? '❌ Still there' : '✅ Replaced'}`);
+              });
               
               // Escribir archivo actualizado
               fs.writeFileSync('README-neofetch.svg', svgContent);
               
               console.log('✅ SVG updated successfully!');
               console.log('📊 Generated file: README-neofetch.svg');
+              
+              // 🔍 VERIFICACIÓN FINAL
+              console.log('🔍 =================================');
+              console.log('🔍 FINAL VERIFICATION:');
+              console.log('🔍 =================================');
+              const finalContent = fs.readFileSync('README-neofetch.svg', 'utf8');
+              
+              // Buscar si quedan placeholders sin reemplazar
+              const unreplacedPlaceholders = finalContent.match(/\{\{[^}]+\}\}/g);
+              if (unreplacedPlaceholders) {
+                console.log('❌ Found unreplaced placeholders:');
+                unreplacedPlaceholders.forEach(placeholder => {
+                  console.log(`   ${placeholder}`);
+                });
+              } else {
+                console.log('✅ All placeholders replaced successfully');
+              }
+              
+              // Mostrar una muestra del contenido generado
+              const lines = finalContent.split('\n');
+              const statsSection = lines.filter(line => line.includes('github-stat') || line.includes('stat-number'));
+              console.log('📋 Generated stats lines:');
+              statsSection.slice(0, 5).forEach((line, index) => {
+                console.log(`   ${index + 1}: ${line.trim()}`);
+              });
+              console.log('🔍 =================================');
               
             } catch (error) {
               console.error('❌ Error updating SVG:', error.message);
