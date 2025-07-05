@@ -261,7 +261,37 @@ jobs:
                 })
               };
               
-              console.log('📈 Stats calculated:', stats);
+              console.log('📈 Stats calculated:', {
+                repos: publicRepos,
+                topLanguages: topLanguages || 'Python 45.2% • Go 32.1% • JavaScript 22.7%',
+                thisYearRepos: thisYearRepos,
+                profileViews: profileViews || 150,
+                totalCommits: recentCommits > 0 ? recentCommits : 'N/A',
+                currentStreak: currentStreak || 0,
+                longestStreak: longestStreak || 0,
+                lastUpdate: new Date().toLocaleDateString('es-MX', {
+                  timeZone: 'America/Monterrey',
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                })
+              });
+              console.log('📈 Stats calculated:', {
+                repos: publicRepos,
+                topLanguages: topLanguages || 'Python 45.2% • Go 32.1% • JavaScript 22.7%',
+                thisYearRepos: thisYearRepos,
+                profileViews: profileViews || 150,
+                totalCommits: recentCommits > 0 ? recentCommits : 'N/A',
+                currentStreak: currentStreak || 0,
+                longestStreak: longestStreak || 0,
+                lastUpdate: new Date().toLocaleDateString('es-MX', {
+                  timeZone: 'America/Monterrey',
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                })
+              });
+              
               return stats;
               
             } catch (error) {
