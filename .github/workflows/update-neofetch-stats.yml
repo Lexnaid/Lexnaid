@@ -330,6 +330,13 @@ jobs:
               // Reemplazar placeholders con logging
               console.log('🔄 Performing replacements:');
               
+              // 🔍 Debug: Verificar que stats tiene los valores correctos
+              console.log('🔍 Debug stats object in replacement function:');
+              console.log(`   stats.profileViews: ${stats.profileViews} (${typeof stats.profileViews})`);
+              console.log(`   stats.totalCommits: ${stats.totalCommits} (${typeof stats.totalCommits})`);
+              console.log(`   stats.currentStreak: ${stats.currentStreak} (${typeof stats.currentStreak})`);
+              console.log(`   stats.longestStreak: ${stats.longestStreak} (${typeof stats.longestStreak})`);
+              
               const replacements = [
                 ['TOTAL_REPOS', stats.repos],
                 ['TOP_LANGUAGES', stats.topLanguages],
@@ -343,6 +350,7 @@ jobs:
               
               replacements.forEach(([key, value]) => {
                 const before = svgContent.includes(`{{${key}}}`);
+                console.log(`🔍 About to replace {{${key}}} with "${value}" (type: ${typeof value})`);
                 svgContent = svgContent.replace(new RegExp(`\\{\\{${key}\\}\\}`, 'g'), value);
                 const after = svgContent.includes(`{{${key}}}`);
                 console.log(`   {{${key}}} -> "${value}" | Before: ${before}, After: ${after ? '❌ Still there' : '✅ Replaced'}`);
@@ -390,6 +398,18 @@ jobs:
           async function main() {
             try {
               const stats = await fetchGitHubStats();
+              
+              // 🔍 Debug: Verificar stats antes de pasarlo a updateNeofetchSVG
+              console.log('🔍 =================================');
+              console.log('🔍 STATS BEFORE PASSING TO UPDATE FUNCTION:');
+              console.log(`   stats.profileViews: ${stats.profileViews} (${typeof stats.profileViews})`);
+              console.log(`   stats.totalCommits: ${stats.totalCommits} (${typeof stats.totalCommits})`);
+              console.log(`   stats.currentStreak: ${stats.currentStreak} (${typeof stats.currentStreak})`);
+              console.log(`   stats.longestStreak: ${stats.longestStreak} (${typeof stats.longestStreak})`);
+              console.log('🔍 Full stats object:');
+              console.log(JSON.stringify(stats, null, 2));
+              console.log('🔍 =================================');
+              
               await updateNeofetchSVG(stats);
               
               console.log('🎉 Neofetch stats updated successfully!');
