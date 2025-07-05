@@ -96,13 +96,18 @@ jobs:
               
               try {
                 // Obtener eventos de commits del usuario
+                console.log('🔍 Fetching user events...');
                 const eventsResponse = await axios.get(
                   `https://api.github.com/users/${USERNAME}/events?per_page=100`,
                   { headers }
                 );
                 
+                console.log(`📊 Events fetched: ${eventsResponse.data.length} total events`);
+                
                 const events = eventsResponse.data;
                 const pushEvents = events.filter(event => event.type === 'PushEvent');
+                
+                console.log(`📊 Push events found: ${pushEvents.length}`);
                 
                 // Contar commits totales de los eventos recientes
                 pushEvents.forEach(event => {
@@ -110,6 +115,8 @@ jobs:
                     recentCommits += event.payload.commits.length;
                   }
                 });
+                
+                console.log(`📊 Recent commits calculated: ${recentCommits}`);
                 
                 // Calcular streak de commits (simplificado basado en eventos)
                 const commitDates = new Set();
@@ -119,6 +126,8 @@ jobs:
                   const dateStr = eventDate.toISOString().split('T')[0];
                   commitDates.add(dateStr);
                 });
+                
+                console.log(`📊 Unique commit dates found: ${commitDates.size}`);
                 
                 // Calcular streak actual (días consecutivos desde hoy hacia atrás)
                 const today = new Date();
@@ -136,26 +145,27 @@ jobs:
                 
                 // Calcular streak más largo (aproximado)
                 const sortedDates = Array.from(commitDates).sort();
-                let tempStreak = 0;
+                let tempStreak = 1; // Empezar en 1
                 
                 for (let i = 0; i < sortedDates.length - 1; i++) {
                   const current = new Date(sortedDates[i]);
                   const next = new Date(sortedDates[i + 1]);
-                  const diffDays = (next - current) / (1000 * 60 * 60 * 24);
+                  const diffDays = Math.abs((next - current) / (1000 * 60 * 60 * 24));
                   
-                  if (diffDays === 1) {
+                  if (diffDays <= 1) { // Mismo día o día siguiente
                     tempStreak++;
                   } else {
-                    longestStreak = Math.max(longestStreak, tempStreak + 1);
-                    tempStreak = 0;
+                    longestStreak = Math.max(longestStreak, tempStreak);
+                    tempStreak = 1;
                   }
                 }
-                longestStreak = Math.max(longestStreak, tempStreak + 1, currentStreak);
+                longestStreak = Math.max(longestStreak, tempStreak, currentStreak);
                 
-                console.log(`📊 Commits calculated: ${recentCommits}, Current streak: ${currentStreak}, Longest: ${longestStreak}`);
+                console.log(`📊 Streaks calculated - Current: ${currentStreak}, Longest: ${longestStreak}`);
                 
               } catch (error) {
-                console.log('⚠️ Could not fetch commit events, using defaults');
+                console.log(`⚠️ Error fetching commit events: ${error.message}`);
+                console.log('⚠️ Using fallback values for commits and streaks');
                 recentCommits = Math.floor(Math.random() * 50) + 20; // Fallback: 20-70
                 currentStreak = Math.floor(Math.random() * 7) + 1;   // Fallback: 1-7
                 longestStreak = Math.floor(Math.random() * 20) + 10; // Fallback: 10-30
@@ -163,14 +173,30 @@ jobs:
               
               // Calcular profile views (estimación)
               try {
-                const totalWatchers = repos.reduce((sum, repo) => sum + repo.watchers_count, 0);
+                console.log('🔍 Calculating profile views...');
+                const totalWatchers = repos.reduce((sum, repo) => sum + (repo.watchers_count || 0), 0);
+                console.log(`📊 Total watchers across repos: ${totalWatchers}`);
+                
                 const baseViews = Math.max(totalWatchers * 8, 50);
                 const randomFactor = Math.floor(Math.random() * 200);
                 profileViews = baseViews + randomFactor;
+                
+                console.log(`📊 Profile views calculated: ${profileViews} (base: ${baseViews}, random: ${randomFactor})`);
+                
               } catch (error) {
-                console.log('⚠️ Could not calculate profile views, using default');
+                console.log(`⚠️ Error calculating profile views: ${error.message}`);
+                console.log('⚠️ Using fallback value for profile views');
                 profileViews = Math.floor(Math.random() * 500) + 100; // Fallback: 100-600
               }
+              
+              // 🔍 VERIFICACIÓN DE VALORES ANTES DE STATS
+              console.log('🔍 =================================');
+              console.log('🔍 VALUES BEFORE CREATING STATS:');
+              console.log(`   recentCommits: ${recentCommits} (${typeof recentCommits})`);
+              console.log(`   currentStreak: ${currentStreak} (${typeof currentStreak})`);
+              console.log(`   longestStreak: ${longestStreak} (${typeof longestStreak})`);
+              console.log(`   profileViews: ${profileViews} (${typeof profileViews})`);
+              console.log('🔍 =================================');
               
               // Analizar lenguajes con porcentajes (solo repos no-fork)
               const ownRepos = repos.filter(repo => !repo.fork && repo.language);
