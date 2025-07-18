@@ -32,7 +32,7 @@ text, tspan {white-space: pre;}
 <tspan x="500" y="90" class="cc">. </tspan><tspan class="key">Uptime</tspan><tspan>: </tspan><tspan x="690" y="90" class="value"> 25 years old</tspan>
 <tspan x="500" y="110" class="cc">. </tspan><tspan class="key">Host</tspan><tspan>: </tspan><tspan x="690" y="110" class="value"> UDEM</tspan>
 <tspan x="500" y="130" class="cc">. </tspan><tspan class="key">Kernel</tspan><tspan>: </tspan><tspan x="690" y="130" class="value"> Data Engineer</tspan>
-<tspan x="500" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan>: </tspan><tspan x="690" y="150" class="value"> VSCode, Visual Studio, Nvim</tspan>
+<tspan x="500" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan>: </tspan><tspan x="690" y="150" class="value"> Nvim, VSCode, PyCharm</tspan>
 <tspan x="500" y="170" class="cc">. </tspan>
 
 
