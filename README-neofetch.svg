@@ -32,7 +32,7 @@ text, tspan {white-space: pre;}
 <tspan x="500" y="90" class="cc">. </tspan><tspan class="key">Uptime</tspan><tspan>: </tspan><tspan x="690" y="90" class="value"> 25 years old</tspan>
 <tspan x="500" y="110" class="cc">. </tspan><tspan class="key">Host</tspan><tspan>: </tspan><tspan x="690" y="110" class="value"> UDEM</tspan>
 <tspan x="500" y="130" class="cc">. </tspan><tspan class="key">Kernel</tspan><tspan>: </tspan><tspan x="690" y="130" class="value"> Data Engineer</tspan>
-<tspan x="500" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan>: </tspan><tspan x="690" y="150" class="value"> VSCode, Visual Studio, Vim</tspan>
+<tspan x="500" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan>: </tspan><tspan x="690" y="150" class="value"> Nvim, VSCode, PyCharm</tspan>
 <tspan x="500" y="170" class="cc">. </tspan>
 
 
@@ -66,12 +66,12 @@ text, tspan {white-space: pre;}
 <tspan x="500" y="610" class="cc">. </tspan>
 
 <tspan x="500" y="630">GitHub Stats</tspan> ——————————————————————————————————————————————————————————————
-<tspan x="500" y="650" class="cc">. </tspan><tspan class="key">Repositories</tspan><tspan>: </tspan><tspan x="690" y="650" class="github-stat">🔒 </tspan><tspan class="stat-number">7</tspan><tspan class="github-stat"> public repos</tspan>
-<tspan x="500" y="670" class="cc">. </tspan><tspan class="key">Profile Views</tspan><tspan>: </tspan><tspan x="690" y="670" class="github-stat">👁️ </tspan><tspan class="stat-number">115</tspan><tspan class="github-stat"> total views</tspan>
-<tspan x="500" y="690" class="cc">. </tspan><tspan class="key">Total Commits</tspan><tspan>: </tspan><tspan x="690" y="690" class="github-stat">📝 </tspan><tspan class="stat-number">23</tspan><tspan class="github-stat"> commits tracked</tspan>
-<tspan x="500" y="710" class="cc">. </tspan><tspan class="key">Commit Streak</tspan><tspan>: </tspan><tspan x="690" y="710" class="github-stat">🔥 </tspan><tspan class="stat-number">4</tspan><tspan class="github-stat"> days current • </tspan><tspan class="stat-number">4</tspan><tspan class="github-stat"> days longest</tspan>
-<tspan x="500" y="730" class="cc">. </tspan><tspan class="key">This Year</tspan><tspan>: </tspan><tspan x="690" y="730" class="github-stat">🆕 </tspan><tspan class="stat-number">6</tspan><tspan class="github-stat"> new repositories</tspan>
-<tspan x="500" y="750" class="cc">. </tspan><tspan class="key">Top Languages</tspan><tspan>: </tspan><tspan x="690" y="750" class="github-stat">💻 Python 53.5% • Apex 43.9% • HTML 2.2%</tspan>
-<tspan x="500" y="770" class="cc">. </tspan><tspan class="key">Last Update</tspan><tspan>: </tspan><tspan x="690" y="770" class="github-stat">🤖 17/07/2025 (automated)</tspan>
+<tspan x="500" y="650" class="cc">. </tspan><tspan class="key">Repositories</tspan><tspan>: </tspan><tspan x="690" y="650" class="github-stat">🔒 </tspan><tspan class="stat-number">8</tspan><tspan class="github-stat"> public repos</tspan>
+<tspan x="500" y="670" class="cc">. </tspan><tspan class="key">Profile Views</tspan><tspan>: </tspan><tspan x="690" y="670" class="github-stat">👁️ </tspan><tspan class="stat-number">246</tspan><tspan class="github-stat"> total views</tspan>
+<tspan x="500" y="690" class="cc">. </tspan><tspan class="key">Total Commits</tspan><tspan>: </tspan><tspan x="690" y="690" class="github-stat">📝 </tspan><tspan class="stat-number">24</tspan><tspan class="github-stat"> commits tracked</tspan>
+<tspan x="500" y="710" class="cc">. </tspan><tspan class="key">Commit Streak</tspan><tspan>: </tspan><tspan x="690" y="710" class="github-stat">🔥 </tspan><tspan class="stat-number">1</tspan><tspan class="github-stat"> days current • </tspan><tspan class="stat-number">4</tspan><tspan class="github-stat"> days longest</tspan>
+<tspan x="500" y="730" class="cc">. </tspan><tspan class="key">This Year</tspan><tspan>: </tspan><tspan x="690" y="730" class="github-stat">🆕 </tspan><tspan class="stat-number">7</tspan><tspan class="github-stat"> new repositories</tspan>
+<tspan x="500" y="750" class="cc">. </tspan><tspan class="key">Top Languages</tspan><tspan>: </tspan><tspan x="690" y="750" class="github-stat">💻 Python 35.0% • Apex 28.7% • Lua 17.7%</tspan>
+<tspan x="500" y="770" class="cc">. </tspan><tspan class="key">Last Update</tspan><tspan>: </tspan><tspan x="690" y="770" class="github-stat">🤖 18/07/2025 (automated)</tspan>
 </text>
 </svg>
