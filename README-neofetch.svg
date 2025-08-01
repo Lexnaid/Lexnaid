@@ -67,11 +67,11 @@ text, tspan {white-space: pre;}
 
 <tspan x="500" y="630">GitHub Stats</tspan> ——————————————————————————————————————————————————————————————
 <tspan x="500" y="650" class="cc">. </tspan><tspan class="key">Repositories</tspan><tspan>: </tspan><tspan x="690" y="650" class="github-stat">🔒 </tspan><tspan class="stat-number">9</tspan><tspan class="github-stat"> public repos</tspan>
-<tspan x="500" y="670" class="cc">. </tspan><tspan class="key">Profile Views</tspan><tspan>: </tspan><tspan x="690" y="670" class="github-stat">👁️ </tspan><tspan class="stat-number">148</tspan><tspan class="github-stat"> total views</tspan>
+<tspan x="500" y="670" class="cc">. </tspan><tspan class="key">Profile Views</tspan><tspan>: </tspan><tspan x="690" y="670" class="github-stat">👁️ </tspan><tspan class="stat-number">54</tspan><tspan class="github-stat"> total views</tspan>
 <tspan x="500" y="690" class="cc">. </tspan><tspan class="key">Total Commits</tspan><tspan>: </tspan><tspan x="690" y="690" class="github-stat">📝 </tspan><tspan class="stat-number">26</tspan><tspan class="github-stat"> commits tracked</tspan>
 <tspan x="500" y="710" class="cc">. </tspan><tspan class="key">Commit Streak</tspan><tspan>: </tspan><tspan x="690" y="710" class="github-stat">🔥 </tspan><tspan class="stat-number">1</tspan><tspan class="github-stat"> days current • </tspan><tspan class="stat-number">4</tspan><tspan class="github-stat"> days longest</tspan>
 <tspan x="500" y="730" class="cc">. </tspan><tspan class="key">This Year</tspan><tspan>: </tspan><tspan x="690" y="730" class="github-stat">🆕 </tspan><tspan class="stat-number">8</tspan><tspan class="github-stat"> new repositories</tspan>
 <tspan x="500" y="750" class="cc">. </tspan><tspan class="key">Top Languages</tspan><tspan>: </tspan><tspan x="690" y="750" class="github-stat">💻 Lua 46.4% • Python 41.6% • Apex 6.5%</tspan>
-<tspan x="500" y="770" class="cc">. </tspan><tspan class="key">Last Update</tspan><tspan>: </tspan><tspan x="690" y="770" class="github-stat">🤖 31/07/2025 (automated)</tspan>
+<tspan x="500" y="770" class="cc">. </tspan><tspan class="key">Last Update</tspan><tspan>: </tspan><tspan x="690" y="770" class="github-stat">🤖 01/08/2025 (automated)</tspan>
 </text>
 </svg>
